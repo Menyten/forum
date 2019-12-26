@@ -30,9 +30,21 @@ const userSchema = mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minlength: 8
+    validate(value) {
+      if (value.length < 8) {
+        throw new Error('Password is to short')
+      }
+    }
   },
-})
+  roles: {
+    type: Array,
+    default: ['user']
+  }
+},
+  {
+    timestamps: true
+  }
+)
 
 userSchema.methods.toJSON = function () {
   const user = this;
@@ -42,8 +54,8 @@ userSchema.methods.toJSON = function () {
 }
 
 userSchema.methods.generateAuthToken = async function () {
-  const { _id } = this
-  const token = jwt.sign({ _id: _id.toString() }, process.env.JWT_SECRET)
+  const { _id, roles } = this
+  const token = jwt.sign({ _id: _id.toString(), roles }, process.env.JWT_SECRET)
   await this.save()
   return token
 }

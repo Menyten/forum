@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const connectToDb = require('./db/connectToDb')
 const userRoutes = require('./routes/userRoutes')
+const forumRoutes = require('./routes/forumRoutes')
 const PORT = process.env.PORT || 3000
 
 const startServer = async () => {
@@ -19,8 +20,9 @@ const startServer = async () => {
 
   // express built in body parser
   app.use(express.json())
-  // routes for a user
+  // routes
   app.use(userRoutes)
+  app.use(forumRoutes)
   // route to check if server is up and running
   app.get('/', (req, res) => res.send('Ok'))
 

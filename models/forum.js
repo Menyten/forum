@@ -1,14 +1,19 @@
 const mongoose = require('mongoose')
+const ObjectID = mongoose.Schema.Types.ObjectId
 
 const forumSchema = mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
   threads: {
-    title: {
-      type: String,
-      required: true
-    },
-    type: Array
+    type: [{ type: ObjectID, ref: 'Thread' }],
   }
-})
+},
+  {
+    timestamps: true
+  }
+)
 
 const Forum = mongoose.model('Forum', forumSchema)
 
