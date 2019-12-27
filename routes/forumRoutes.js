@@ -2,7 +2,7 @@ const express = require('express')
 const router = new express.Router()
 const Forum = require('../models/forum')
 const Thread = require('../models/thread')
-const Comment = require('../models/comment')
+const Post = require('../models/post')
 
 // Route to get all forums
 router.get('/api/forums', async (req, res) => {
@@ -27,7 +27,7 @@ router.post('/api/forums/create', async (req, res) => {
 
 // Route to create a new thread in a forum
 router.post('/api/forum/:id/create', async (req, res) => {
-  const firstComment = new Comment({
+  const firstComment = new Post({
     createdBy: '5e04da8bdb928a1dcfcb7fcd',
     text: req.body.text
   })
