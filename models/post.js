@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const ObjectID = mongoose.Schema.Types.ObjectId
 
-const commentSchema = mongoose.Schema({
+const postSchema = mongoose.Schema({
   createdBy: {
     type: ObjectID
   },
@@ -15,6 +15,6 @@ const commentSchema = mongoose.Schema({
   }
 )
 
-const Comment = mongoose.model('Comment', commentSchema)
+const Post = mongoose.model('Post', postSchema)
 
-module.exports = Comment
+module.exports = Post

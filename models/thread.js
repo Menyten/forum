@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const ObjectID = mongoose.Schema.Types.ObjectId
-const Comment = require('../models/comment')
 
 const threadSchema = mongoose.Schema({
   title: {
@@ -14,10 +13,11 @@ const threadSchema = mongoose.Schema({
   // createdBy: {
   //   type: ObjectID,
   // }
-  /* comments: [{
-    type: Comment,
-    required: true
-  }] */
+  posts: [{
+    type: ObjectID,
+    required: true,
+    ref: 'Post'
+  }]
 },
   {
     timestamps: true

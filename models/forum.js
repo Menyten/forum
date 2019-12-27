@@ -7,7 +7,10 @@ const forumSchema = mongoose.Schema({
     required: true
   },
   threads: {
-    type: [{ type: ObjectID, ref: 'Thread' }],
+    type: [{
+      type: ObjectID,
+      ref: 'Thread'
+    }],
   }
 },
   {
