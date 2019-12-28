@@ -6,12 +6,12 @@ const forumSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  threads: {
+  /* threads: {
     type: [{
       type: ObjectID,
       ref: 'Thread'
     }],
-  }
+  } */
 },
   {
     timestamps: true

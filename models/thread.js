@@ -6,18 +6,19 @@ const threadSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  /**
-   * Eventually this field will be added
-   * But need to fix token being sent on requests first
-   */
-  // createdBy: {
-  //   type: ObjectID,
-  // }
-  posts: [{
+  forum: {
     type: ObjectID,
-    required: true,
-    ref: 'Post'
-  }]
+    required: true
+  },
+  createdBy: {
+    type: ObjectID,
+    required: true
+  }
+  // posts: [{
+  //   type: ObjectID,
+  //   required: true,
+  //   ref: 'Post'
+  // }]
 },
   {
     timestamps: true

@@ -26,14 +26,62 @@ router.post('/api/forums/create', async (req, res) => {
 })
 
 // Route to create a new thread in a forum
-router.post('/api/forum/:id/create', async (req, res) => {
-  const firstComment = new Post({
-    createdBy: '5e04da8bdb928a1dcfcb7fcd',
-    text: req.body.text
+router.post('/api/forum/:id', async (req, res) => {
+  const thread = new Thread({
+    title: req.body.title,
+    forum: req.params.id,
+    createdBy: '5e07655906b796297590ec4d'
   })
-  const thread = new Thread({ title: req.body.title })
-  res.send()
+  const firstPost = new Post({
+    createdBy: '5e07655906b796297590ec4d',
+    text: req.body.text,
+    thread: thread._id
+  })
+  try {
+    await thread.save()
+    await firstPost.save()
+    res.send()
+  } catch (e) {
+    res.status(500).send(e)
+  }
+})
 
+// Route to get all threads in forum
+// TODO: Should probably implement pagination
+router.get('/api/forum/:id', async (req, res) => {
+  try {
+    const threads = await Thread.find({ forum: req.params.id })
+    res.send(threads)
+  } catch (e) {
+    res.status(500).send(e)
+  }
+})
+
+// Route to post in a thread
+router.post('/api/thread/:id', async (req, res) => {
+  const post = new Post({
+    createdBy: '5e07655906b796297590ec4d',
+    text: req.body.text,
+    thread: req.params.id
+  })
+  try {
+    const savedPost = await post.save()
+    res.send(savedPost)
+  } catch (e) {
+    res.status(500).send(e)
+  }
+})
+
+// Route to get all posts in a thread
+// TODO: should probably implement pagination
+//  
+router.get('/api/thread/:id', async (req, res) => {
+  try {
+    const posts = await Post.find({ thread: req.params.id })
+    res.send(posts)
+  } catch (e) {
+    res.status(500).send(e)
+  }
 })
 
 module.exports = router
