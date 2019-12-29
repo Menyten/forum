@@ -36,10 +36,11 @@ const userSchema = mongoose.Schema({
       }
     }
   },
-  roles: {
-    type: Array,
-    default: ['user']
-  }
+  role: {
+    type: String,
+    default: 'user'
+  },
+  tokens: [String]
 },
   {
     timestamps: true
@@ -50,12 +51,14 @@ userSchema.methods.toJSON = function () {
   const user = this;
   const userObject = user.toObject();
   delete userObject.password;
+  delete userObject.tokens;
   return userObject;
 }
 
 userSchema.methods.generateAuthToken = async function () {
-  const { _id, roles } = this
+  const { _id, roles, tokens } = this
   const token = jwt.sign({ _id: _id.toString(), roles }, process.env.JWT_SECRET)
+  this.tokens = [...tokens, token]
   await this.save()
   return token
 }
@@ -65,12 +68,10 @@ userSchema.statics.findByCredentials = async (email, password) => {
   if (!user) {
     throw new Error('Unable to login');
   }
-
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
     throw new Error('Unable to login');
   }
-
   return user;
 }
 

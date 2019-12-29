@@ -1,11 +1,12 @@
 const express = require('express')
 const router = new express.Router()
+const auth = require('../middleware/auth')
 const Forum = require('../models/forum')
 const Thread = require('../models/thread')
 const Post = require('../models/post')
 
 // Route to get all forums
-router.get('/api/forums', async (req, res) => {
+router.get('/api/forums', auth, async (req, res) => {
   try {
     const forums = await Forum.find().select('_id title')
     res.send(forums)
@@ -15,9 +16,10 @@ router.get('/api/forums', async (req, res) => {
 })
 
 // Route to create a new forum
-router.post('/api/forums/create', async (req, res) => {
+router.post('/api/forums/create', auth, async (req, res) => {
   const forum = new Forum(req.body)
   try {
+    if (req.user.role !== 'admin') { return res.status(403).send() }
     await forum.save()
     res.send({ success: 'New forum created' })
   } catch (e) {
@@ -26,7 +28,7 @@ router.post('/api/forums/create', async (req, res) => {
 })
 
 // Route to create a new thread in a forum
-router.post('/api/forum/:id', async (req, res) => {
+router.post('/api/forum/:id', auth, async (req, res) => {
   const thread = new Thread({
     title: req.body.title,
     forum: req.params.id,
@@ -48,7 +50,7 @@ router.post('/api/forum/:id', async (req, res) => {
 
 // Route to get all threads in forum
 // TODO: Should probably implement pagination
-router.get('/api/forum/:id', async (req, res) => {
+router.get('/api/forum/:id', auth, async (req, res) => {
   try {
     const threads = await Thread.find({ forum: req.params.id })
     res.send(threads)
@@ -58,7 +60,7 @@ router.get('/api/forum/:id', async (req, res) => {
 })
 
 // Route to post in a thread
-router.post('/api/thread/:id', async (req, res) => {
+router.post('/api/thread/:id', auth, async (req, res) => {
   const post = new Post({
     createdBy: '5e07655906b796297590ec4d',
     text: req.body.text,
@@ -75,7 +77,7 @@ router.post('/api/thread/:id', async (req, res) => {
 // Route to get all posts in a thread
 // TODO: should probably implement pagination
 //  
-router.get('/api/thread/:id', async (req, res) => {
+router.get('/api/thread/:id', auth, async (req, res) => {
   try {
     const posts = await Post.find({ thread: req.params.id })
     res.send(posts)
