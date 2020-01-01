@@ -4,7 +4,7 @@ const app = express()
 const connectToDb = require('./db/connectToDb')
 const userRoutes = require('./routes/userRoutes')
 const forumRoutes = require('./routes/forumRoutes')
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3001
 
 const startServer = async () => {
   let error = null
