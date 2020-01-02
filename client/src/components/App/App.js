@@ -1,26 +1,16 @@
 import React from 'react';
 import './reset.css';
-import { Switch, Route } from "react-router-dom";
-import { StyledContainer, StyledMain } from './StyledApp'
-import NavBar from '../NavBar'
-import Start from '../../pages/Start'
+import { StyledContainer } from './StyledApp'
+import Header from '../Header'
+import Main from '../Main'
+import Footer from '../Footer'
 
 const App = () => {
   return (
     <StyledContainer>
-      <header>
-        <NavBar />
-      </header>
-      <StyledMain>
-        <Switch>
-          <Route path='/'>
-            <Start />
-          </Route>
-        </Switch>
-      </StyledMain>
-      <footer>
-        Footer och annat
-    </footer>
+      <Header />
+      <Main />
+      <Footer />
     </StyledContainer>
   )
 }

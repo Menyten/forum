@@ -6,13 +6,6 @@ const StyledContainer = styled.div`
   flex-direction: column;
 `
 
-const StyledMain = styled.main`
-  flex: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-`
-
 export {
   StyledContainer,
-  StyledMain
 }
