@@ -1,11 +1,21 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
-  form: {
+  paper: {
+    marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
-    maxWidth: '25rem',
-    width: '100%'
+    alignItems: 'center'
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main
+  },
+  form: {
+    marginTop: theme.spacing(3)
+  },
+  submit: {
+    margin: theme.spacing(3, 0)
   }
 }))
 

@@ -1,9 +1,7 @@
 const createAccountFields = [
-  'Användarnamn',
-  'Förnamn',
-  'Efternamn',
-  'E-post',
-  'Lösenord'
+  { label: 'E-post', type: 'email', name: 'email' },
+  { label: 'Användarnamn', type: 'text', name: 'username' },
+  { label: 'Lösenord', type: 'password', name: 'password' }
 ]
 
 export {
