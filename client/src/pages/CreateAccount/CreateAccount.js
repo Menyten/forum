@@ -5,21 +5,18 @@ import {
   TextField,
   Button,
   Typography,
-  Avatar,
-  Snackbar
+  Avatar
 } from '@material-ui/core'
 import { createAccountFields } from '../../staticData'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import useStyles from './useStyles'
 import forum from '../../helpers/forum'
-import MySnackbarWrapper from '../../components/MySnackbarWrapper'
+import { useDispatch } from 'react-redux'
+import { showSnackbar } from '../../actions'
 
 const CreateAccount = () => {
-  const [info, setInfo] = useState({
-    open: false,
-    message: '',
-    variant: ''
-  })
+  const dispatch = useDispatch()
+  const classes = useStyles()
   const [fields, setFields] = useState({
     firstname: '',
     lastname: '',
@@ -27,19 +24,17 @@ const CreateAccount = () => {
     email: '',
     password: ''
   })
-  const classes = useStyles()
 
-  const handleClose = () => setInfo({ ...info, open: false })
-  const handleOpen = (message, variant) => setInfo({ open: true, message, variant })
+  const openSnackbar = (variant, message) => dispatch(showSnackbar(variant, message))
 
   const submitForm = async e => {
     e.preventDefault()
     try {
       await forum.post('/api/user', fields)
-      handleOpen('Ditt konto har skapats!', 'success')
+      openSnackbar('success', 'Ditt konto har skapats!')
     } catch (e) {
       if (e.response.status === 403 || e.response.status === 500) {
-        handleOpen('Något gick fel. Var god försök igen!', 'error')
+        openSnackbar('error', 'Något gick fel. Var god försök igen!')
       }
     }
   }
@@ -62,21 +57,6 @@ const CreateAccount = () => {
 
   return (
     <Container maxWidth="xs">
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-        open={info.open}
-        autoHideDuration={3000}
-        onClose={handleClose}
-      >
-        <MySnackbarWrapper
-          onClose={handleClose}
-          variant={info.variant}
-          message={info.message}
-        />
-      </Snackbar>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />

@@ -3,11 +3,37 @@ import { Switch, Route } from "react-router-dom";
 import { StyledMain } from './StyledMain'
 import Start from '../../pages/Start'
 import CreateAccount from '../../pages/CreateAccount'
+import SignIn from '../../pages/SignIn'
+import { useSelector, useDispatch } from 'react-redux'
+import { closeSnackbar } from '../../actions'
+import MySnackbarWrapper from '../../components/MySnackbarWrapper'
+import { Snackbar } from '@material-ui/core'
 
 const Main = () => {
+  const { snackbar: { open, variant, message } } = useSelector(state => state)
+  const dispatch = useDispatch()
+
   return (
     <StyledMain>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+        open={open}
+        autoHideDuration={3000}
+        onClose={() => dispatch(closeSnackbar())}
+      >
+        <MySnackbarWrapper
+          variant={variant}
+          message={message}
+          onClose={() => dispatch(closeSnackbar())}
+        />
+      </Snackbar>
       <Switch>
+        <Route path='/logga-in'>
+          <SignIn />
+        </Route>
         <Route path='/skapa-konto'>
           <CreateAccount />
         </Route>
