@@ -1,3 +1,4 @@
 export const SHOW_SNACKBAR = 'SHOW_SNACKBAR'
 export const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR'
 export const SET_LOGGED_IN = 'SET_LOGGED_IN'
+export const SET_FORUMS = 'SET_FORUMS'

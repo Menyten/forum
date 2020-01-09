@@ -6,7 +6,7 @@ const Thread = require('../models/thread')
 const Post = require('../models/post')
 
 // Route to get all forums
-router.get('/api/forums', auth, async (req, res) => {
+router.get('/api/forums', async (req, res) => {
   try {
     const forums = await Forum.find().select('_id title')
     res.send(forums)

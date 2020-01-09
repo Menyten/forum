@@ -4,12 +4,13 @@ import { StyledMain } from './StyledMain'
 import Start from '../../pages/Start'
 import CreateAccount from '../../pages/CreateAccount'
 import SignIn from '../../pages/SignIn'
+import Forum from '../../pages/Forum'
 import { useSelector, useDispatch } from 'react-redux'
 import { closeSnackbar } from '../../actions'
 import MySnackbarWrapper from '../../components/MySnackbarWrapper'
 import { Snackbar } from '@material-ui/core'
 
-const Main = () => {
+const Main = (props) => {
   const { snackbar: { open, variant, message } } = useSelector(state => state)
   const dispatch = useDispatch()
 
@@ -31,6 +32,9 @@ const Main = () => {
         />
       </Snackbar>
       <Switch>
+        <Route path='/forum/:id'>
+          <Forum />
+        </Route>
         <Route path='/logga-in'>
           <SignIn />
         </Route>

@@ -12,12 +12,14 @@ import { Link } from 'react-router-dom'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { useDispatch } from 'react-redux'
 import { showSnackbar, setLoggedIn } from '../../actions'
+import { useHistory } from 'react-router-dom'
 import useStyles from './useStyles'
 import forum from '../../helpers/forum'
 import setCookie from '../../helpers/setCookie'
 
 
 const SignIn = () => {
+  const history = useHistory()
   const dispatch = useDispatch()
   const classes = useStyles()
   const [fields, setFields] = useState({
@@ -35,6 +37,7 @@ const SignIn = () => {
       const res = await forum.post('/api/user/login', fields)
       setCookie(res.data.token)
       dispatch(setLoggedIn(res.data.user))
+      history.push('/')
     } catch (e) {
       openSnackbar('error', 'Inloggning misslyckades!')
     }
