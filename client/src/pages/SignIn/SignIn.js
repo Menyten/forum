@@ -10,17 +10,35 @@ import {
 import MUILink from '@material-ui/core/Link'
 import { Link } from 'react-router-dom'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import { useDispatch } from 'react-redux'
+import { showSnackbar, setLoggedIn } from '../../actions'
 import useStyles from './useStyles'
+import forum from '../../helpers/forum'
+import setCookie from '../../helpers/setCookie'
 
 
 const SignIn = () => {
+  const dispatch = useDispatch()
   const classes = useStyles()
   const [fields, setFields] = useState({
-    username: '',
+    email: '',
     password: ''
   })
 
+  const openSnackbar = (variant, message) => dispatch(showSnackbar(variant, message))
+
   const handleInputs = e => setFields({ ...fields, [e.target.getAttribute('name')]: e.target.value })
+
+  const signIn = async e => {
+    e.preventDefault()
+    try {
+      const res = await forum.post('/api/user/login', fields)
+      setCookie(res.data.token)
+      dispatch(setLoggedIn(res.data.user))
+    } catch (e) {
+      openSnackbar('error', 'Inloggning misslyckades!')
+    }
+  }
 
   return (
     <Container maxWidth='xs'>
@@ -31,7 +49,7 @@ const SignIn = () => {
         <Typography component="h1" variant="h5">
           Logga in
       </Typography>
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit={signIn}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -39,7 +57,7 @@ const SignIn = () => {
                 required
                 fullWidth
                 value={fields.firstname}
-                name='username'
+                name='email'
                 onChange={handleInputs}
               />
             </Grid>

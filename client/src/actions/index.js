@@ -1,4 +1,8 @@
-import { SHOW_SNACKBAR, CLOSE_SNACKBAR } from './types'
+import {
+  SHOW_SNACKBAR,
+  CLOSE_SNACKBAR,
+  SET_LOGGED_IN
+} from './types'
 
 export const showSnackbar = (variant, message) => {
   return {
@@ -11,5 +15,12 @@ export const closeSnackbar = () => {
   return {
     type: CLOSE_SNACKBAR,
     payload: { open: false, variant: '', message: '' }
+  }
+}
+
+export const setLoggedIn = user => {
+  return {
+    type: SET_LOGGED_IN,
+    payload: user
   }
 }

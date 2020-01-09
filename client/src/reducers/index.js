@@ -1,6 +1,8 @@
 import snackbarReducer from './snackbarReducer'
+import userReducer from './userReducer'
 import { combineReducers } from 'redux'
 
 export default combineReducers({
-  snackbar: snackbarReducer
+  snackbar: snackbarReducer,
+  user: userReducer
 })

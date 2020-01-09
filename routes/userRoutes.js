@@ -23,9 +23,11 @@ router.post('/api/user/login', async (req, res) => {
   try {
     const user = await User.findByCredentials(req.body.email, req.body.password)
     const token = await user.generateAuthToken()
+    // TODO: Send cookie with token inside maybe?
+    // res.cookie('access_token', token)
     res.send({ user, token })
   } catch (e) {
-    res.status(500).send()
+    res.status(403).send()
   }
 })
 

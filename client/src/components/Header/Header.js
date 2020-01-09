@@ -12,7 +12,7 @@ const Header = () => {
     <header>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" style={{ flexGrow: 1 }}>
+          <Typography color='inherit' variant="h6" component={Link} to='/' style={{ flexGrow: 1, textDecoration: 'none' }}>
             Forumet
           </Typography>
           <Button color="inherit" component={Link} to='/skapa-konto'>
