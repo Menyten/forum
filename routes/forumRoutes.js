@@ -28,6 +28,7 @@ router.post('/api/forums/create', auth, async (req, res) => {
 })
 
 // Route to create a new thread in a forum
+// TODO: Replace hardcoded createdBy with dynamic _id
 router.post('/api/forum/:id', auth, async (req, res) => {
   const thread = new Thread({
     title: req.body.title,
@@ -50,9 +51,12 @@ router.post('/api/forum/:id', auth, async (req, res) => {
 
 // Route to get all threads in forum
 // TODO: Should probably implement pagination
-router.get('/api/forum/:id', auth, async (req, res) => {
+router.get('/api/forum/:id', async (req, res) => {
   try {
-    const threads = await Thread.find({ forum: req.params.id })
+    const threads = await Thread
+      .find({ forum: req.params.id })
+      .populate({ path: 'createdBy', select: 'username' })
+      .exec()
     res.send(threads)
   } catch (e) {
     res.status(500).send(e)

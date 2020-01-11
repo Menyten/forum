@@ -12,7 +12,8 @@ const threadSchema = mongoose.Schema({
   },
   createdBy: {
     type: ObjectID,
-    required: true
+    required: true,
+    ref: 'User'
   }
   // posts: [{
   //   type: ObjectID,
