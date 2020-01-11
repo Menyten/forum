@@ -35,7 +35,6 @@ const Forum = () => {
   }
 
   const onThreadClick = e => {
-    history.push(e.currentTarget.dataset.id)
     history.push(`/forum/${id}/${e.currentTarget.dataset.id}`)
   }
 
@@ -77,7 +76,7 @@ const Forum = () => {
 
   return (
     <TableContainer component={Paper}>
-      <Table aria-label="simple table">
+      <Table size='small' aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Ämne</TableCell>
