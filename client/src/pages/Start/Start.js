@@ -60,7 +60,7 @@ const Start = () => {
   ))
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className={classes.paper}>
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>

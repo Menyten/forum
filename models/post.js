@@ -3,7 +3,8 @@ const ObjectID = mongoose.Schema.Types.ObjectId
 
 const postSchema = mongoose.Schema({
   createdBy: {
-    type: ObjectID
+    type: ObjectID,
+    ref: 'User'
   },
   text: {
     type: String,

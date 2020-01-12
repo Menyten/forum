@@ -21,7 +21,7 @@ const Forum = () => {
   const dispatch = useDispatch()
   const history = useHistory()
   const classes = useStyles()
-  const { id } = useParams()
+  const { forumId } = useParams()
   const { threads } = useSelector(state => state)
 
   useEffect(() => {
@@ -30,12 +30,12 @@ const Forum = () => {
   }, [])
 
   const getThreads = async () => {
-    const res = await forum.get(`/api/forum/${id}`)
+    const res = await forum.get(`/api/forum/${forumId}`)
     dispatch(setThreads(res.data))
   }
 
   const onThreadClick = e => {
-    history.push(`/forum/${id}/${e.currentTarget.dataset.id}`)
+    history.push(`/forum/${forumId}/${e.currentTarget.dataset.id}`)
   }
 
   const renderThreads = () => threads.map(({ title, createdBy: { username }, _id }) => (
@@ -75,7 +75,7 @@ const Forum = () => {
   ))
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className={classes.paper}>
       <Table size='small' aria-label="simple table">
         <TableHead>
           <TableRow>

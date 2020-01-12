@@ -3,7 +3,8 @@ import {
   CLOSE_SNACKBAR,
   SET_LOGGED_IN,
   SET_FORUMS,
-  SET_THREADS
+  SET_THREADS,
+  SET_POSTS
 } from './types'
 
 export const showSnackbar = (variant, message) => {
@@ -38,5 +39,12 @@ export const setThreads = threads => {
   return {
     type: SET_THREADS,
     payload: threads
+  }
+}
+
+export const setPosts = posts => {
+  return {
+    type: SET_POSTS,
+    payload: posts
   }
 }

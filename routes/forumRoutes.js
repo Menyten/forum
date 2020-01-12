@@ -81,9 +81,12 @@ router.post('/api/thread/:id', auth, async (req, res) => {
 // Route to get all posts in a thread
 // TODO: should probably implement pagination
 //  
-router.get('/api/thread/:id', auth, async (req, res) => {
+router.get('/api/thread/:id', async (req, res) => {
   try {
-    const posts = await Post.find({ thread: req.params.id })
+    const posts = await Post
+      .find({ thread: req.params.id })
+      .populate({ path: 'createdBy', select: 'username' })
+      .exec()
     res.send(posts)
   } catch (e) {
     res.status(500).send(e)

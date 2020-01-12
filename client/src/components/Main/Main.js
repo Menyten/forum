@@ -5,6 +5,7 @@ import Start from '../../pages/Start'
 import CreateAccount from '../../pages/CreateAccount'
 import SignIn from '../../pages/SignIn'
 import Forum from '../../pages/Forum'
+import Thread from '../../pages/Thread'
 import { useSelector, useDispatch } from 'react-redux'
 import { closeSnackbar } from '../../actions'
 import MySnackbarWrapper from '../../components/MySnackbarWrapper'
@@ -32,7 +33,10 @@ const Main = (props) => {
         />
       </Snackbar>
       <Switch>
-        <Route path='/forum/:id'>
+        <Route path='/forum/:forumId/:threadId'>
+          <Thread />
+        </Route>
+        <Route path='/forum/:forumId'>
           <Forum />
         </Route>
         <Route path='/logga-in'>
