@@ -3,7 +3,7 @@ import { SET_THREADS } from '../actions/types'
 export default (state = [], { type, payload }) => {
   switch (type) {
     case SET_THREADS:
-      return payload
+      return [...state, ...payload]
     default:
       return state
   }
