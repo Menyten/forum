@@ -27,7 +27,6 @@ const Thread = () => {
     dispatch(setThread(res.data))
   }
 
-
   const renderPosts = () => posts.map(post => <Post {...post} key={post._id} />)
 
   return (
