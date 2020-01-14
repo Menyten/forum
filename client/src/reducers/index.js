@@ -2,7 +2,7 @@ import snackbarReducer from './snackbarReducer'
 import userReducer from './userReducer'
 import forumReducer from './forumReducer'
 import threadReducer from './threadReducer'
-import postsReducer from './postsReducer'
+import threadDataReducer from './threadDataReducer'
 import { combineReducers } from 'redux'
 
 export default combineReducers({
@@ -10,5 +10,5 @@ export default combineReducers({
   user: userReducer,
   forums: forumReducer,
   threads: threadReducer,
-  posts: postsReducer
+  thread: threadDataReducer
 })

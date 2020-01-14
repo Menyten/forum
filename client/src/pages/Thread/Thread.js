@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
-import { setPosts } from '../../actions'
+import { setThread } from '../../actions'
 import forum from '../../helpers/forum'
-import formatDate from '../../helpers/formatDate'
 import useStyles from './useStyles'
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography'
+import Post from './components/Post'
 
 const Thread = () => {
-  const { posts } = useSelector(state => state)
+  const { thread: { title, posts } } = useSelector(state => state)
   const { threadId } = useParams()
   const dispatch = useDispatch()
   const classes = useStyles()
@@ -21,44 +20,23 @@ const Thread = () => {
 
   const getPosts = async () => {
     const res = await forum.get(`/api/thread/${threadId}`)
-    dispatch(setPosts(res.data))
+    dispatch(setThread(res.data))
   }
 
-  posts.forEach(post => console.log(post))
 
-  const renderPosts = () => posts.map(({ _id, createdBy: { username }, text, createdAt }) => (
-    <Paper
-      className={classes.post}
-      component='article'
-      variant='outlined'
-      square
-      key={_id}
-    >
+  const renderPosts = () => posts.map(post => <Post {...post} key={post._id} />)
 
-      <section className={classes.left}>
-        <Typography variant='caption' color='textSecondary'>
-          {formatDate(createdAt)}
-        </Typography>
-        <div className={classes.avatar}>
-          <Typography className={classes.temporary} variant='h2'>
-            J
-          </Typography>
-        </div>
-        <Typography>
-          {username}
-        </Typography>
-      </section>
-
-      <section className={classes.right}>
-        <Typography variant='body2'>
-          {text}
-        </Typography>
-      </section>
-
-    </Paper >
-  ))
-
-  return renderPosts()
+  return (
+    <section className={classes.container}>
+      <Typography
+        variant='h1'
+        className={classes.title}
+      >
+        {title}
+      </Typography>
+      {renderPosts()}
+    </section>
+  )
 }
 
 export default Thread

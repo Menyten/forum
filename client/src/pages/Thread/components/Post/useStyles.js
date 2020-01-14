@@ -1,13 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
-  container: {
-    margin: theme.spacing(4, 0),
-  },
-  title: {
-    fontSize: '1.5rem',
-    padding: theme.spacing(0, 1)
-  },
   post: {
     display: 'flex',
     margin: theme.spacing(1, 0, 0, 0),

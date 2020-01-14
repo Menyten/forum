@@ -83,11 +83,14 @@ router.post('/api/thread/:id', auth, async (req, res) => {
 //  
 router.get('/api/thread/:id', async (req, res) => {
   try {
+    const { title } = await Thread.findById(req.params.id)
+    console.log(title);
+
     const posts = await Post
       .find({ thread: req.params.id })
       .populate({ path: 'createdBy', select: 'username' })
       .exec()
-    res.send(posts)
+    res.send({ title, posts })
   } catch (e) {
     res.status(500).send(e)
   }
