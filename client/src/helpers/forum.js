@@ -8,17 +8,9 @@ const forum = axios.create({
   }
 })
 
-forum.interceptors.request.use(
-  config => {
-    if (config.baseURL) {
-      const token = getCookie('access_token');
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-    }
-    return config;
-  },
-  error => Promise.reject(error)
-);
+forum.interceptors.request.use(config => {
+  config.headers.Authorization = `Bearer ${getCookie('access_token')}`
+  return config;
+})
 
 export default forum
