@@ -30,6 +30,7 @@ const Forum = () => {
   }, [])
 
   const getThreads = async () => {
+    if (threads.length) { return }
     const res = await forum.get(`/api/forum/${forumId}`)
     dispatch(setThreads(res.data))
   }

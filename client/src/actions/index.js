@@ -1,7 +1,8 @@
 import {
   SHOW_SNACKBAR,
   CLOSE_SNACKBAR,
-  SET_LOGGED_IN,
+  USER_LOGIN,
+  USER_LOGOUT,
   SET_FORUMS,
   SET_THREADS,
   SET_THREAD
@@ -23,8 +24,14 @@ export const closeSnackbar = () => {
 
 export const setLoggedIn = user => {
   return {
-    type: SET_LOGGED_IN,
+    type: USER_LOGIN,
     payload: user
+  }
+}
+
+export const logOut = () => {
+  return {
+    type: USER_LOGOUT,
   }
 }
 
