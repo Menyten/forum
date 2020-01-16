@@ -29,6 +29,7 @@ const Start = () => {
   }, [])
 
   const getForums = async () => {
+    if (forums.length) { return }
     const res = await forum.get('/api/forums')
     dispatch(setForums(res.data))
   }

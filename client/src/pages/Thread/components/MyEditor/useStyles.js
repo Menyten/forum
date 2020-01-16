@@ -8,9 +8,14 @@ const useStyles = makeStyles(theme => {
       margin: theme.spacing(0, 1)
     },
     editor: {
-      // set height to 20rem on size bigger than sm
+      maxHeight: '15rem',
       height: '15rem',
-      padding: theme.spacing(0, 1)
+      overflowY: 'auto',
+      padding: theme.spacing(0, 1),
+      [theme.breakpoints.up('sm')]: {
+        maxHeight: '20rem',
+        height: '20rem'
+      }
     }
   })
 })

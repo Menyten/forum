@@ -31,6 +31,11 @@ router.post('/api/user/login', async (req, res) => {
   }
 })
 
+// Route to check if logged in
+router.get('/api/user/logged-in', auth, async (req, res) => {
+  res.send(req.user)
+})
+
 // Route to sign out
 router.post('/api/user/logout', auth, async (req, res) => {
   try {
