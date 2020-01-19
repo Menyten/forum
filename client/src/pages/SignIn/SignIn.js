@@ -37,7 +37,7 @@ const SignIn = () => {
       const res = await forum.post('/api/user/login', fields)
       setCookie(res.data.token)
       dispatch(setLoggedIn(res.data.user))
-      history.push('/')
+      history.goBack()
     } catch (e) {
       openSnackbar('error', 'Inloggning misslyckades!')
     }

@@ -3,6 +3,7 @@ import userReducer from './userReducer'
 import forumReducer from './forumReducer'
 import threadReducer from './threadReducer'
 import threadDataReducer from './threadDataReducer'
+import editorReducer from './editorReducer'
 import { combineReducers } from 'redux'
 
 export default combineReducers({
@@ -10,5 +11,6 @@ export default combineReducers({
   user: userReducer,
   forums: forumReducer,
   threads: threadReducer,
-  thread: threadDataReducer
+  thread: threadDataReducer,
+  editor: editorReducer
 })

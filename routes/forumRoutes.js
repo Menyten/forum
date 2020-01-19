@@ -66,7 +66,8 @@ router.get('/api/forum/:id', async (req, res) => {
 // Route to post in a thread
 router.post('/api/thread/:id', auth, async (req, res) => {
   const post = new Post({
-    createdBy: '5e07655906b796297590ec4d',
+    // TODO: Not yet tested if re.user._id works
+    createdBy: req.user._id,
     text: req.body.text,
     thread: req.params.id
   })

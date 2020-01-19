@@ -1,14 +1,21 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Editor, EditorState, RichUtils } from 'draft-js'
+import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js'
+import { disableEditor } from '../../../../actions'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import ToolBar from './components/ToolBar'
-import PublishIcon from '@material-ui/icons/Publish';
+import PublishIcon from '@material-ui/icons/Publish'
+import CloseIcon from '@material-ui/icons/Close'
 import useStyles from './useStyles'
+import forum from '../../../../helpers/forum'
 
 const MyEditor = () => {
+  const dispatch = useDispatch()
+  const { threadId } = useParams()
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
   const [toolbarButtonsState, setButtonsState] = useState({
     BOLD: false,
@@ -43,6 +50,12 @@ const MyEditor = () => {
     return 'not-handled'
   }
 
+  const createPost = async () => {
+    const postData = convertToRaw(editorState.getCurrentContent())
+    await forum.post(`/api/thread/${threadId}`)
+    console.log(postData)
+  }
+
   return (
     <Grid container>
       <Grid item xs={12}>
@@ -71,7 +84,10 @@ const MyEditor = () => {
         </Paper>
       </Grid>
       <Grid item xs={12} align='right'>
-        <Button startIcon={<PublishIcon />}>
+        <Button startIcon={<CloseIcon />} onClick={() => dispatch(disableEditor())}>
+          Avbryt
+        </Button>
+        <Button startIcon={<PublishIcon />} onClick={createPost}>
           Publicera
         </Button>
       </Grid>

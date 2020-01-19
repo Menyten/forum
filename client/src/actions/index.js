@@ -5,7 +5,9 @@ import {
   USER_LOGOUT,
   SET_FORUMS,
   SET_THREADS,
-  SET_THREAD
+  SET_THREAD,
+  ENABLE_EDITOR,
+  DISABLE_EDITOR
 } from './types'
 
 export const showSnackbar = (variant, message) => {
@@ -53,5 +55,17 @@ export const setThread = thread => {
   return {
     type: SET_THREAD,
     payload: thread
+  }
+}
+
+export const enableEditor = () => {
+  return {
+    type: ENABLE_EDITOR,
+  }
+}
+
+export const disableEditor = () => {
+  return {
+    type: DISABLE_EDITOR
   }
 }
