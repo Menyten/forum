@@ -33,10 +33,10 @@ router.post('/api/forum/:id', auth, async (req, res) => {
   const thread = new Thread({
     title: req.body.title,
     forum: req.params.id,
-    createdBy: '5e07655906b796297590ec4d'
+    createdBy: req.user._id
   })
   const firstPost = new Post({
-    createdBy: '5e07655906b796297590ec4d',
+    createdBy: req.user._id,
     text: req.body.text,
     thread: thread._id
   })
