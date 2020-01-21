@@ -12,6 +12,7 @@ import PublishIcon from '@material-ui/icons/Publish'
 import CloseIcon from '@material-ui/icons/Close'
 import useStyles from './useStyles'
 import forum from '../../../../helpers/forum'
+import { showSnackbar } from '../../../../actions'
 
 const MyEditor = () => {
   const dispatch = useDispatch()
@@ -52,8 +53,8 @@ const MyEditor = () => {
 
   const createPost = async () => {
     const postData = convertToRaw(editorState.getCurrentContent())
-    await forum.post(`/api/thread/${threadId}`)
-    console.log(postData)
+    await forum.post(`/api/thread/${threadId}`, { text: postData })
+    dispatch(showSnackbar('success', 'Inlägget har publicerats!'))
   }
 
   return (

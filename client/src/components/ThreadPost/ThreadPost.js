@@ -1,11 +1,12 @@
 import React from 'react'
-import { Editor, ConvertFromRaw } from 'draft-js'
+import { Editor, EditorState, convertFromRaw } from 'draft-js'
 
 const ThreadPost = ({ storedState }) => {
-  const state = ConvertFromRaw(storedState)
+  const state = convertFromRaw(storedState)
+  const editorState = EditorState.createWithContent(state)
   return (
     <div className="readonly-editor">
-      <Editor editorState={state} readOnly={true} />
+      <Editor editorState={editorState} readOnly={true} />
     </div>
   )
 }

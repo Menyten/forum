@@ -2,6 +2,7 @@ import React from 'react'
 import formatDate from '../../../../helpers/formatDate'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
+import ThreadPost from '../../../../components/ThreadPost'
 import useStyles from './useStyles'
 import profile from '../../../../assets/profile.png'
 
@@ -56,9 +57,7 @@ const Post = ({ createdAt, createdBy: { username }, text }) => {
         sm={9}
         className={classes.textContainer}
       >
-        <Typography variant='body2' className={classes.text}>
-          {text}
-        </Typography>
+        <ThreadPost storedState={text} className={classes.text} />
       </Grid>
     </Grid>
   )

@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
   textContainer: {
   },
   text: {
+    "fontFamily": "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
     [theme.breakpoints.up('sm')]: {
       fontSize: '1rem'
     }

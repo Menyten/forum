@@ -7,7 +7,7 @@ const postSchema = mongoose.Schema({
     ref: 'User'
   },
   text: {
-    type: String,
+    type: Object,
     required: true
   },
   thread: {
@@ -16,6 +16,7 @@ const postSchema = mongoose.Schema({
   }
 },
   {
+    minimize: false,
     timestamps: true
   }
 )
