@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setThread, enableEditor } from '../../actions'
 import forum from '../../helpers/forum'
@@ -7,7 +7,7 @@ import useStyles from './useStyles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from '@material-ui/icons/Add'
 import Post from './components/Post'
 import MyEditor from './components/MyEditor'
 import isObjectNotEmpty from '../../helpers/isObjectNotEmpty'
@@ -17,6 +17,7 @@ const Thread = () => {
   const { threadId } = useParams()
   const dispatch = useDispatch()
   const classes = useStyles()
+  const apiUrl = `/api/thread/${threadId}`
 
   useEffect(() => {
     getPosts()
@@ -37,7 +38,7 @@ const Thread = () => {
     null
 
   const renderEditor = userObject => editor => {
-    return isObjectNotEmpty(userObject) && editor ? <MyEditor /> : null
+    return isObjectNotEmpty(userObject) && editor ? <MyEditor apiUrl={apiUrl} /> : null
   }
 
   const renderPosts = () => posts.map(post => <Post {...post} key={post._id} />)

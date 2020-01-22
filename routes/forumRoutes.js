@@ -28,7 +28,6 @@ router.post('/api/forums/create', auth, async (req, res) => {
 })
 
 // Route to create a new thread in a forum
-// TODO: Replace hardcoded createdBy with dynamic _id
 router.post('/api/forum/:id', auth, async (req, res) => {
   const thread = new Thread({
     title: req.body.title,

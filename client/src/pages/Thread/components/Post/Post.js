@@ -55,7 +55,6 @@ const Post = ({ createdAt, createdBy: { username }, text }) => {
         item
         xs={12}
         sm={9}
-        className={classes.textContainer}
       >
         <ThreadPost storedState={text} className={classes.text} />
       </Grid>

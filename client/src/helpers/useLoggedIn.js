@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setLoggedIn } from '../actions'
 import forum from './forum'
 import getCookie from './getCookie'
 
 const useLoggedIn = () => {
-  const { user } = useSelector(state => state)
   const dispatch = useDispatch()
   useEffect(() => {
     if (getCookie('access_token')) {

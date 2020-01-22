@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js'
 import { disableEditor } from '../../../../actions'
@@ -14,9 +13,8 @@ import useStyles from './useStyles'
 import forum from '../../../../helpers/forum'
 import { showSnackbar } from '../../../../actions'
 
-const MyEditor = () => {
+const MyEditor = ({ apiUrl, title }) => {
   const dispatch = useDispatch()
-  const { threadId } = useParams()
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
   const [toolbarButtonsState, setButtonsState] = useState({
     BOLD: false,
@@ -53,8 +51,9 @@ const MyEditor = () => {
 
   const createPost = async () => {
     const postData = convertToRaw(editorState.getCurrentContent())
-    await forum.post(`/api/thread/${threadId}`, { text: postData })
+    await forum.post(apiUrl, { title, text: postData })
     dispatch(showSnackbar('success', 'Inlägget har publicerats!'))
+    dispatch(disableEditor())
   }
 
   return (
@@ -64,7 +63,6 @@ const MyEditor = () => {
           variant='outlined'
           square
           onClick={focusEditor}
-          className={classes.container}
         >
           <ToolBar
             onStyleClick={onStyleClick}

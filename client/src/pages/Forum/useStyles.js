@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
-  paper: {
+  container: {
     margin: theme.spacing(4, 0)
   },
   table: {

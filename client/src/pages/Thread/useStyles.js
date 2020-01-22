@@ -11,7 +11,6 @@ const useStyles = makeStyles(theme => ({
   post: {
     display: 'flex',
     margin: theme.spacing(1, 0, 0, 0),
-    padding: theme.spacing(4, 0),
     padding: theme.spacing(1),
   },
   avatar: {
