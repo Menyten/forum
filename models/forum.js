@@ -5,13 +5,7 @@ const forumSchema = mongoose.Schema({
   title: {
     type: String,
     required: true
-  },
-  /* threads: {
-    type: [{
-      type: ObjectID,
-      ref: 'Thread'
-    }],
-  } */
+  }
 },
   {
     timestamps: true
