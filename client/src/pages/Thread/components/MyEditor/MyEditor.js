@@ -13,7 +13,7 @@ import useStyles from './useStyles'
 import forum from '../../../../helpers/forum'
 import { showSnackbar, emptyThreads } from '../../../../actions'
 
-const MyEditor = ({ apiUrl, title, setCreateThread, getThreads }) => {
+const MyEditor = ({ apiUrl, title, setCreateThread, getThreads, getPosts }) => {
   const dispatch = useDispatch()
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
   const [toolbarButtonsState, setButtonsState] = useState({
@@ -58,6 +58,8 @@ const MyEditor = ({ apiUrl, title, setCreateThread, getThreads }) => {
       dispatch(emptyThreads())
       setCreateThread(false)
       getThreads()
+    } else {
+      getPosts()
     }
   }
 

@@ -38,7 +38,7 @@ const Thread = () => {
     null
 
   const renderEditor = userObject => editor => {
-    return isObjectNotEmpty(userObject) && editor ? <MyEditor apiUrl={apiUrl} /> : null
+    return isObjectNotEmpty(userObject) && editor ? <MyEditor apiUrl={apiUrl} getPosts={getPosts} /> : null
   }
 
   const renderPosts = () => posts.map(post => <Post {...post} key={post._id} />)
