@@ -35,7 +35,6 @@ const Forum = () => {
   }, [])
 
   const getThreads = async () => {
-    if (threads.length) { return }
     const res = await forum.get(`/api/forum/${forumId}`)
     dispatch(setThreads(res.data))
   }
@@ -114,7 +113,7 @@ const Forum = () => {
         <Button startIcon={<AddIcon />} color='primary' onClick={() => onCreateThreadClick(false)}>Avbryt</Button>
       </Grid>
       <Grid item xs={12}>
-        <CreateThread />
+        <CreateThread setCreateThread={setCreateThread} getThreads={getThreads} />
       </Grid>
     </Grid>
 }

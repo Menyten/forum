@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import MyEditor from '../../../Thread/components/MyEditor'
 import useStyles from './useStyles'
 
-const CreateThread = () => {
+const CreateThread = ({ setCreateThread, getThreads }) => {
   const [title, setTitle] = useState('')
   const { forumId } = useParams()
   const { container } = useStyles()
@@ -28,7 +28,7 @@ const CreateThread = () => {
         />
       </Grid>
       <Grid item xs={12}>
-        <MyEditor apiUrl={apiUrl} title={title} />
+        <MyEditor apiUrl={apiUrl} title={title} setCreateThread={setCreateThread} getThreads={getThreads} />
       </Grid>
     </Grid>
   )

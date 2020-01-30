@@ -5,9 +5,10 @@ import {
   USER_LOGOUT,
   SET_FORUMS,
   SET_THREADS,
+  EMPTY_THREADS,
   SET_THREAD,
   ENABLE_EDITOR,
-  DISABLE_EDITOR
+  DISABLE_EDITOR,
 } from './types'
 
 export const showSnackbar = (variant, message) => {
@@ -48,6 +49,12 @@ export const setThreads = threads => {
   return {
     type: SET_THREADS,
     payload: threads
+  }
+}
+
+export const emptyThreads = () => {
+  return {
+    type: EMPTY_THREADS
   }
 }
 

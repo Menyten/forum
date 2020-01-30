@@ -11,9 +11,9 @@ import PublishIcon from '@material-ui/icons/Publish'
 import CloseIcon from '@material-ui/icons/Close'
 import useStyles from './useStyles'
 import forum from '../../../../helpers/forum'
-import { showSnackbar } from '../../../../actions'
+import { showSnackbar, emptyThreads } from '../../../../actions'
 
-const MyEditor = ({ apiUrl, title }) => {
+const MyEditor = ({ apiUrl, title, setCreateThread, getThreads }) => {
   const dispatch = useDispatch()
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
   const [toolbarButtonsState, setButtonsState] = useState({
@@ -54,6 +54,11 @@ const MyEditor = ({ apiUrl, title }) => {
     await forum.post(apiUrl, { title, text: postData })
     dispatch(showSnackbar('success', 'Inlägget har publicerats!'))
     dispatch(disableEditor())
+    if (title) {
+      dispatch(emptyThreads())
+      setCreateThread(false)
+      getThreads()
+    }
   }
 
   return (
